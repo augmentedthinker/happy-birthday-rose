@@ -114,11 +114,19 @@
     }
 
     /* Ambient Controls */
-    .ambient-control {
+    .ambient-bar {
       position: fixed;
       top: 18px;
       right: 18px;
       z-index: 40;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .ambient-control {
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -155,6 +163,183 @@
     .ambient-control[aria-pressed="true"] .ambient-dot {
       background: rgba(255, 255, 255, 0.45);
       box-shadow: none;
+    }
+
+    /* Birthday Gift Entrance Overlay */
+    body.gift-locked {
+      overflow: hidden;
+    }
+
+    .gift-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background:
+        radial-gradient(circle at 50% 38%, rgba(255, 248, 246, 0.98) 0%, rgba(246, 236, 234, 0.98) 60%, rgba(235, 220, 218, 0.99) 100%);
+      transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.75s;
+    }
+
+    .gift-gate.is-opened {
+      opacity: 0;
+      transform: scale(1.05);
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    /* Satin Gift Ribbons */
+    .gift-ribbon-v,
+    .gift-ribbon-h {
+      position: absolute;
+      pointer-events: none;
+      background: linear-gradient(135deg, #b83b4f 0%, #8f2335 55%, #a83044 100%);
+      box-shadow: 0 0 28px rgba(130, 35, 52, 0.22);
+    }
+
+    .gift-ribbon-v {
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: clamp(46px, 7vw, 68px);
+      transform: translateX(-50%);
+      border-left: 1.5px solid rgba(255, 225, 228, 0.45);
+      border-right: 1.5px solid rgba(255, 225, 228, 0.45);
+    }
+
+    .gift-ribbon-h {
+      left: 0;
+      right: 0;
+      top: 50%;
+      height: clamp(46px, 7vw, 68px);
+      transform: translateY(-50%);
+      border-top: 1.5px solid rgba(255, 225, 228, 0.45);
+      border-bottom: 1.5px solid rgba(255, 225, 228, 0.45);
+    }
+
+    .gift-tag {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 470px;
+      background: #fffdfb;
+      border: 1px solid rgba(166, 52, 70, 0.22);
+      border-radius: 30px;
+      padding: clamp(32px, 5vw, 48px) clamp(24px, 5vw, 40px);
+      text-align: center;
+      box-shadow:
+        0 30px 70px rgba(74, 22, 32, 0.20),
+        0 4px 16px rgba(74, 22, 32, 0.08),
+        inset 0 0 0 6px rgba(166, 52, 70, 0.04);
+    }
+
+    .gift-bow {
+      width: 58px;
+      height: 58px;
+      margin: -6px auto 14px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(166, 52, 70, 0.12), rgba(201, 72, 91, 0.08));
+      border: 1px solid rgba(166, 52, 70, 0.24);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--rose);
+    }
+
+    .gift-bow svg {
+      width: 30px;
+      height: 30px;
+    }
+
+    .gift-to {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 10px;
+    }
+
+    .gift-heading {
+      margin: 0 0 12px;
+      font-family: var(--font-serif);
+      font-size: clamp(2.3rem, 6vw, 3.1rem);
+      font-weight: 600;
+      line-height: 1.05;
+      color: var(--ink);
+    }
+
+    .gift-sub {
+      margin: 0 auto 28px;
+      max-width: 34ch;
+      font-size: 0.98rem;
+      line-height: 1.62;
+      color: var(--ink-soft);
+    }
+
+    .gift-open-btn {
+      appearance: none;
+      width: 100%;
+      max-width: 340px;
+      border: none;
+      border-radius: 999px;
+      padding: 16px 26px;
+      background: linear-gradient(135deg, var(--rose-bright) 0%, var(--rose-deep) 100%);
+      color: #fffbf9;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      box-shadow: 0 14px 32px rgba(130, 35, 52, 0.34);
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    }
+
+    .gift-open-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 38px rgba(130, 35, 52, 0.42);
+      filter: brightness(1.05);
+    }
+
+    .gift-open-btn:active {
+      transform: translateY(0);
+    }
+
+    .gift-btn-main {
+      font-size: 1.02rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .gift-btn-sub {
+      font-size: 0.77rem;
+      font-weight: 500;
+      color: rgba(255, 240, 242, 0.90);
+      letter-spacing: 0.04em;
+    }
+
+    .gift-quiet-btn {
+      margin-top: 16px;
+      appearance: none;
+      border: none;
+      background: transparent;
+      color: var(--ink-muted);
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      padding: 4px 8px;
+      transition: color 0.2s ease;
+    }
+
+    .gift-quiet-btn:hover {
+      color: var(--rose-deep);
     }
 
     /* Page Container */
@@ -1016,16 +1201,55 @@
         min-height: 310px;
       }
 
-      .ambient-control {
+      .ambient-bar {
         top: 12px;
         right: 12px;
-        padding: 7px 12px;
-        font-size: 12px;
+        gap: 6px;
+      }
+
+      .ambient-control {
+        padding: 7px 11px;
+        font-size: 11.5px;
       }
     }
   </style>
 </head>
-<body>
+<body class="gift-locked">
+  <!-- Birthday Gift Entrance Gate -->
+  <div class="gift-gate" id="gift-gate" role="dialog" aria-modal="true" aria-labelledby="gift-heading">
+    <div class="gift-ribbon-v" aria-hidden="true"></div>
+    <div class="gift-ribbon-h" aria-hidden="true"></div>
+    <div class="gift-tag">
+      <div class="gift-bow" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 7c3.6 0 6.5 2.7 6.5 6.3 0 4.2-3.3 7.2-6.5 9.2-3.2-2-6.5-5-6.5-9.2C9.5 9.7 12.4 7 16 7z" />
+          <path d="M16 10.2c2 0 3.4 1.4 3.4 3.2 0 1.9-1.5 3.3-3.4 3.3s-3.4-1.4-3.4-3.3c0-1.8 1.4-3.2 3.4-3.2z" />
+          <path d="M16 22.5V29" />
+          <path d="M16 26c-2.6-.2-4.6-1.5-5.6-3.6 2.5-.1 4.4.9 5.6 3.6z" />
+          <path d="M16 25.2c2.5-.2 4.4-1.4 5.3-3.4-2.4-.1-4.2.8-5.3 3.4z" />
+        </svg>
+      </div>
+      <span class="gift-to">For Rose · From Gage</span>
+      <h1 id="gift-heading" class="gift-heading">Happy Birthday, Rose</h1>
+      <p class="gift-sub">
+        A little birthday gift is wrapped up inside—with memories, a voice note, and a special guest.
+      </p>
+      <button type="button" class="gift-open-btn" id="open-gift-btn">
+        <span class="gift-btn-main">Open Your Gift</span>
+        <span class="gift-btn-sub">Going full screen with music on</span>
+      </button>
+      <div>
+        <button type="button" class="gift-quiet-btn" id="open-quiet-btn">
+          or open quietly without music
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Soft Mellow Background Melody (Coastal Rhodes) -->
+  <audio id="bg-melody" loop preload="auto">
+    <source src="birthday-assets/melody-coastal-rhodes.mp3" type="audio/mpeg" />
+  </audio>
   <!-- Reusable Botanical Rose SVG Symbol -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
@@ -1057,17 +1281,29 @@
   <!-- Confetti Layer -->
   <canvas id="confetti-canvas" aria-hidden="true"></canvas>
 
-  <!-- Subtle Motion Mode Toggle -->
-  <button
-    type="button"
-    class="ambient-control"
-    id="motion-toggle"
-    aria-pressed="false"
-    aria-label="Switch between scroll-linked ocean pan and still background"
-  >
-    <span class="ambient-dot" aria-hidden="true"></span>
-    <span id="motion-label">Scroll-linked ocean</span>
-  </button>
+  <!-- Subtle Ambient Controls -->
+  <div class="ambient-bar">
+    <button
+      type="button"
+      class="ambient-control"
+      id="music-toggle"
+      aria-pressed="true"
+      aria-label="Turn background birthday melody on or off"
+    >
+      <span class="ambient-dot" aria-hidden="true"></span>
+      <span id="music-label">Music off</span>
+    </button>
+    <button
+      type="button"
+      class="ambient-control"
+      id="motion-toggle"
+      aria-pressed="false"
+      aria-label="Switch between scroll-linked ocean pan and still background"
+    >
+      <span class="ambient-dot" aria-hidden="true"></span>
+      <span id="motion-label">Scroll-linked ocean</span>
+    </button>
+  </div>
 
   <main>
     <!-- Hero -->
@@ -1284,6 +1520,204 @@
       const motionToggle = document.getElementById('motion-toggle');
       const motionLabel = document.getElementById('motion-label');
 
+      // Soft Web Audio UI Sound Effects (gentle, warm, never harsh)
+      let audioCtx = null;
+      let sfxEnabled = true;
+
+      function getAudioCtx() {
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC) return null;
+        if (!audioCtx) audioCtx = new AC();
+        if (audioCtx.state === 'suspended') audioCtx.resume().catch(() => {});
+        return audioCtx;
+      }
+
+      function playTone(ctx, freq, startOffset, duration, gainPeak, type = 'sine') {
+        const now = ctx.currentTime + startOffset;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, now);
+        gain.gain.setValueAtTime(0.0001, now);
+        gain.gain.exponentialRampToValueAtTime(gainPeak, now + 0.018);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + duration + 0.02);
+      }
+
+      function playSfx(kind) {
+        if (!sfxEnabled) return;
+        const ctx = getAudioCtx();
+        if (!ctx) return;
+        try {
+          if (kind === 'unwrap') {
+            // Warm Fmaj9 harp-bell flourish
+            [349.23, 440.0, 523.25, 659.25, 783.99].forEach((f, i) => {
+              playTone(ctx, f, i * 0.065, 0.85, 0.055, 'sine');
+              playTone(ctx, f * 2, i * 0.065, 0.45, 0.015, 'triangle');
+            });
+          } else if (kind === 'confetti') {
+            // Soft party-popper muffled pop + sparkling bell cascade
+            const now = ctx.currentTime;
+            const popOsc = ctx.createOscillator();
+            const popGain = ctx.createGain();
+            popOsc.type = 'sine';
+            popOsc.frequency.setValueAtTime(190, now);
+            popOsc.frequency.exponentialRampToValueAtTime(62, now + 0.09);
+            popGain.gain.setValueAtTime(0.11, now);
+            popGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.11);
+            popOsc.connect(popGain);
+            popGain.connect(ctx.destination);
+            popOsc.start(now);
+            popOsc.stop(now + 0.12);
+
+            // Soft filtered air-burst flutter
+            const bufLen = Math.floor(ctx.sampleRate * 0.12);
+            const noiseBuf = ctx.createBuffer(1, bufLen, ctx.sampleRate);
+            const data = noiseBuf.getChannelData(0);
+            for (let i = 0; i < bufLen; i++) data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufLen * 0.35));
+            const noise = ctx.createBufferSource();
+            noise.buffer = noiseBuf;
+            const filter = ctx.createBiquadFilter();
+            filter.type = 'bandpass';
+            filter.frequency.value = 1800;
+            const nGain = ctx.createGain();
+            nGain.gain.value = 0.055;
+            noise.connect(filter);
+            filter.connect(nGain);
+            nGain.connect(ctx.destination);
+            noise.start(now);
+
+            // Sparkling F-major celebration chimes
+            [523.25, 659.25, 698.46, 880.0, 1046.5, 1318.5].forEach((f, i) => {
+              playTone(ctx, f, 0.04 + i * 0.048, 0.55, 0.036, 'sine');
+            });
+          } else if (kind === 'hat') {
+            // Playful gentle two-note pop
+            playTone(ctx, 440.0, 0, 0.16, 0.045, 'triangle');
+            playTone(ctx, 587.33, 0.06, 0.22, 0.045, 'sine');
+          } else if (kind === 'minky') {
+            // Adorable soft cat-bell chime chirp
+            playTone(ctx, 698.46, 0, 0.18, 0.04, 'sine');
+            playTone(ctx, 880.0, 0.075, 0.26, 0.042, 'sine');
+          }
+        } catch {}
+      }
+
+      // Soft Background Birthday Melody (Coastal Rhodes) + Smooth Volume Fade & Ducking
+      const bgMelody = document.getElementById('bg-melody');
+      const musicToggle = document.getElementById('music-toggle');
+      const musicLabel = document.getElementById('music-label');
+      const BG_NORMAL_VOL = 0.22;
+      const BG_DUCK_VOL = 0.04;
+      let musicWanted = false;
+      let fadeTimer = null;
+
+      function fadeBgVolume(targetVol, durationMs = 650) {
+        if (!bgMelody) return;
+        if (fadeTimer) clearInterval(fadeTimer);
+        const startVol = bgMelody.volume;
+        const steps = Math.max(1, Math.round(durationMs / 35));
+        let step = 0;
+        fadeTimer = setInterval(() => {
+          step++;
+          const ratio = Math.min(1, step / steps);
+          bgMelody.volume = Math.min(1, Math.max(0, startVol + (targetVol - startVol) * ratio));
+          if (ratio >= 1) {
+            clearInterval(fadeTimer);
+            fadeTimer = null;
+          }
+        }, 35);
+      }
+
+      function updateMusicUI(on) {
+        if (!musicToggle || !musicLabel) return;
+        musicToggle.setAttribute('aria-pressed', String(!on));
+        musicLabel.textContent = on ? 'Music on' : 'Music off';
+      }
+
+      function startBgMusic() {
+        if (!bgMelody) return;
+        musicWanted = true;
+        sfxEnabled = true;
+        bgMelody.volume = 0.001;
+        const p = bgMelody.play();
+        if (p && typeof p.then === 'function') {
+          p.then(() => {
+            updateMusicUI(true);
+            fadeBgVolume(BG_NORMAL_VOL, 1200);
+          }).catch(() => {
+            updateMusicUI(false);
+          });
+        } else {
+          updateMusicUI(true);
+          fadeBgVolume(BG_NORMAL_VOL, 1200);
+        }
+      }
+
+      function stopBgMusic() {
+        if (!bgMelody) return;
+        musicWanted = false;
+        fadeBgVolume(0, 350);
+        setTimeout(() => {
+          if (!musicWanted) bgMelody.pause();
+        }, 380);
+        updateMusicUI(false);
+      }
+
+      if (musicToggle) {
+        musicToggle.addEventListener('click', () => {
+          if (musicWanted && bgMelody && !bgMelody.paused) {
+            stopBgMusic();
+          } else {
+            startBgMusic();
+          }
+        });
+      }
+
+      // Birthday Gift Entrance Gate
+      const giftGate = document.getElementById('gift-gate');
+      const openGiftBtn = document.getElementById('open-gift-btn');
+      const openQuietBtn = document.getElementById('open-quiet-btn');
+
+      function openGift({ withMusic, withFullscreen }) {
+        if (!giftGate) return;
+        window.scrollTo(0, 0);
+        document.body.classList.remove('gift-locked');
+        giftGate.classList.add('is-opened');
+        giftGate.setAttribute('aria-hidden', 'true');
+
+        if (withFullscreen && document.documentElement.requestFullscreen) {
+          document.documentElement.requestFullscreen().catch(() => {});
+        }
+
+        if (withMusic) {
+          sfxEnabled = true;
+          playSfx('unwrap');
+          startBgMusic();
+        } else {
+          sfxEnabled = false;
+          updateMusicUI(false);
+        }
+
+        // Also unlock mobile video frame decoding on this real user gesture
+        if (video) {
+          video.play().then(() => {
+            video.pause();
+            applyVideoFrame(displayProgress);
+          }).catch(() => {});
+        }
+      }
+
+      if (openGiftBtn) {
+        openGiftBtn.addEventListener('click', () => openGift({ withMusic: true, withFullscreen: true }));
+      }
+      if (openQuietBtn) {
+        openQuietBtn.addEventListener('click', () => openGift({ withMusic: false, withFullscreen: false }));
+      }
+
       // Smooth scroll-scrubbed Costa Rica ocean pan (all-intra keyframe video)
       let scrollMode = !reducedMotion;
       let targetProgress = 0;
@@ -1407,6 +1841,7 @@
 
       if (hatToggle && photoStage) {
         hatToggle.addEventListener('click', () => {
+          playSfx('hat');
           const showingOriginal = photoStage.classList.toggle('show-original');
           hatToggle.setAttribute('aria-pressed', String(showingOriginal));
           hatToggle.textContent = showingOriginal ? 'Put the silly hat back on' : 'See without the hat';
@@ -1513,11 +1948,18 @@
         audio.addEventListener('loadedmetadata', () => {
           if (voiceTime) voiceTime.textContent = `0:00 / ${fmtTime(audio.duration)}`;
         });
-        audio.addEventListener('play', () => setPlayingUI(true));
-        audio.addEventListener('pause', () => setPlayingUI(false));
+        audio.addEventListener('play', () => {
+          setPlayingUI(true);
+          if (musicWanted && bgMelody && !bgMelody.paused) fadeBgVolume(BG_DUCK_VOL, 350);
+        });
+        audio.addEventListener('pause', () => {
+          setPlayingUI(false);
+          if (musicWanted && bgMelody && !bgMelody.paused) fadeBgVolume(BG_NORMAL_VOL, 650);
+        });
         audio.addEventListener('ended', () => {
           setPlayingUI(false);
           if (progressFill) progressFill.style.width = '100%';
+          if (musicWanted && bgMelody && !bgMelody.paused) fadeBgVolume(BG_NORMAL_VOL, 700);
         });
         audio.addEventListener('timeupdate', () => {
           const dur = audio.duration || 8.9;
@@ -1553,6 +1995,7 @@
 
       if (minkyBtn && minkyQuote) {
         minkyBtn.addEventListener('click', () => {
+          playSfx('minky');
           minkyIdx = (minkyIdx + 1) % minkyLines.length;
           minkyQuote.textContent = minkyLines[minkyIdx];
           minkyBtn.classList.remove('wiggle');
@@ -1665,6 +2108,7 @@
 
       if (celebrateBtn) {
         celebrateBtn.addEventListener('click', () => {
+          playSfx('confetti');
           launchConfetti();
           celebrateBtn.textContent = 'Happy Birthday, Rose!';
           setTimeout(() => {
